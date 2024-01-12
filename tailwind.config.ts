@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -9,12 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'landing-bg': "url('/landing/landing-img.jpg')",
+        'rota-hero-bg': "url('/rota/hero-bg.jpg')",
+        'about-hero-bg': "url('/about/hero-bg.jpg')",
+        'event-hero-bg': "url('/event/hero-bg.jpg')",
       },
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;
