@@ -1,4 +1,5 @@
 type User = {
+  _id?: string;
   personal: {
     first_name: string;
     last_name: string;

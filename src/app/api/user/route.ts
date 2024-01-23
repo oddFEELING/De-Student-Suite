@@ -8,9 +8,10 @@ import Database from '@/server/mongodb/db-connect';
 //=============================================>
 export async function GET(req: NextRequest): Promise<Response> {
   const user = await currentUser();
-
   // ======= check if user exists -->
   if (!user) return new NextResponse('unauthorized', { status: 401 });
+
+  await Database.connect(user.id);
 
   // ======= check if user is admnin -->
   const mongo_profile: User | null = await user_model.findOne({
@@ -20,10 +21,19 @@ export async function GET(req: NextRequest): Promise<Response> {
   // ======= no mongo profile -->
   if (!mongo_profile) return new NextResponse('not-found', { status: 404 });
 
+  if (
+    mongo_profile.personal.role === 'user' ||
+    mongo_profile.personal.role === 'creator'
+  )
+    return new NextResponse('unAuthorized', { status: 401 });
+
+  const allUsers = await user_model.find();
+  await Database.close(user.id);
+
   return Response.json({
     status: 200,
     message: 'ALl users fetched!',
-    data: null,
+    data: allUsers,
   });
 }
 
@@ -31,11 +41,11 @@ export async function GET(req: NextRequest): Promise<Response> {
 // ======= POST -->
 //=============================================>
 export async function POST(req: NextRequest): Promise<Response> {
-  await Database.connect();
-
   // ======= get user from clerk -->
   const user = await currentUser();
   if (!user) return new NextResponse('unauthorized', { status: 401 });
+
+  await Database.connect(user.id);
 
   // ======= check if user exists -->
   const userExists = await user_model.findOne({
@@ -66,7 +76,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     },
   };
   const newUser = await user_model.create(userData);
-  await Database.close();
+  await Database.close(user.id);
 
   return Response.json({
     status: 200,

@@ -15,6 +15,7 @@ type EventType = {
   };
   stars: number;
   shares: number;
+  status: 'open' | 'closed' | 'pending';
   saves: number;
   interested: [userID: string];
 };

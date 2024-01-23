@@ -7,6 +7,11 @@ const event_schema = new Schema<EventType>(
     location: String,
     date: String,
     notes: String,
+    status: {
+      type: String,
+      enum: ['open', 'closed', 'pending'],
+      default: 'pending',
+    },
     volunteers_needed: { type: Boolean, required: true, default: false },
     host: {
       name: String,
