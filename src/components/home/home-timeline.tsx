@@ -7,7 +7,7 @@ const HomeTimeLine: React.FC = () => {
   return (
     <div className='bg-white py-24 sm:py-32'>
       {/* -- title */}
-      <div className='pb-5 mb-10 mx-auto px-'>
+      <div className='pb-5 mb-10 mx-auto px-4'>
         <p className='text-base font-semibold leading-7 text-violet-600'>
           See what&apos;s going on
         </p>
@@ -26,8 +26,8 @@ const HomeTimeLine: React.FC = () => {
                 duration: 0.3,
                 delay: idx * 0.2,
                 type: 'spring',
-                damping: 9,
-                stiffness: 70,
+                damping: 10,
+                stiffness: 100,
               }}
               whileInView={{ x: 0, opacity: 1 }}
             >

@@ -13,9 +13,10 @@ const config: Config = {
         'rota-hero-bg': "url('/rota/hero-bg.jpg')",
         'about-hero-bg': "url('/about/hero-bg.jpg')",
         'event-hero-bg': "url('/event/hero-bg.jpg')",
+        'contact-hero-bg': "url('/contact/hero-bg.jpg')",
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };
 export default config;

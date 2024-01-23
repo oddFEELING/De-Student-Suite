@@ -2,7 +2,6 @@ import React from 'react';
 import HeaderComponent from '@/components/lib/header/header';
 import AboutCopy from '@/components/about/about-copy';
 import AboutPostList from '@/components/about/about-post-list';
-import Banner from '@/components/lib/banners/banner';
 
 const AboutPage = () => {
   return (

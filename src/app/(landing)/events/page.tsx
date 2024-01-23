@@ -1,7 +1,18 @@
-import HeaderComponent from '@/components/lib/header/header';
+'use client';
 import React from 'react';
+import { useUser } from '@clerk/nextjs';
+import HeaderComponent from '@/components/lib/header/header';
+import EventList from '@/components/events/event-list';
 
 const EventsPage = () => {
+  const { user } = useUser();
+  // const user = await currentUser();
+
+  if (user) {
+    console.log(user);
+    // console.log(user);
+  }
+
   return (
     <main className='landing__page'>
       <HeaderComponent
@@ -27,8 +38,10 @@ const EventsPage = () => {
           btn_two_hover_bg: 'hover:bg-amber-700',
         }}
       />
+
+      <EventList />
+      <div className='h-max w-full flex items-center justify-center py-14'></div>
     </main>
   );
 };
-
 export default EventsPage;

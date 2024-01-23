@@ -3,7 +3,7 @@ type Rota = {
   _id: string;
   rota_name: string;
   rota_description: string;
-  created: string;
+  createdAt: string;
   icon_url: string;
   status: 'open' | 'closed';
   dates: {

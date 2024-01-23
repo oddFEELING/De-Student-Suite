@@ -1,16 +1,17 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { classnames } from '@/utils/vclassnames';
-import { user_store } from '@/stores/user-store';
+import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { classnames } from '@/utils/classnames';
+import React, { useState, useEffect } from 'react';
+import AppLogo from '../logo/logo';
 
 const LandingNav = () => {
+  const { user } = useUser();
   const router = useRouter();
-  const [isScrolled, setIsScrolled] = useState<Boolean | null>(null);
-  const { user } = user_store();
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   useEffect(() => {
     function setTheScroll() {
@@ -31,6 +32,10 @@ const LandingNav = () => {
     };
   });
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <nav
       className={classnames(
@@ -38,24 +43,7 @@ const LandingNav = () => {
         isScrolled ? 'bg-white/90 h-16 shadow-lg' : 'bg-transparent h-24'
       )}
     >
-      <p
-        className={classnames(
-          'flex items-center justify-center text-xl md:text-2xl gap-2 ml-4 font-black cursor-pointer',
-          isScrolled ? 'text-gray-800' : ' text-white'
-        )}
-        onClick={() => router.push('/')}
-      >
-        {/* @ts-ignore */}
-        <lord-icon
-          src='https://cdn.lordicon.com/sncsryxo.json'
-          trigger='loop'
-          colors={`primary:${isScrolled ? '#121331' : '#ffffff'},secondary:${
-            isScrolled ? '#6c16c7' : '#a866ee'
-          }`}
-          style={{ width: '50px', height: '50px' }}
-        />
-        DSS &nbsp;&nbsp; <b className='hidden md:block font-medium'>|</b>
-      </p>
+      <AppLogo dark={isScrolled} />
 
       {/* -- desktop view */}
       <ul className='md:flex items-center justify-center px-3 gap-5 ml-5 hidden'>
@@ -71,22 +59,36 @@ const LandingNav = () => {
         ))}
       </ul>
 
-      <motion.div
-        className='hidden md:flex absolute right-10'
-        initial={{ x: 100, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        whileHover={{
-          scale: 1.02,
-          boxShadow: '5px 6px 15px rgba(0, 0, 0, 0.15)',
-        }}
-        whileTap={{ scale: 0.95 }}
-      >
-        {!user && (
-          <button className='py-2 px-8 rounded-md bg-violet-600 text-white text-sm drop-shadow-xl transition-all ease-out duration-300'>
-            Sign in
-          </button>
-        )}
-      </motion.div>
+      {!user ? (
+        <motion.div
+          className='hidden md:flex absolute right-10'
+          initial={{ x: 100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          whileHover={{
+            scale: 1.02,
+            boxShadow: '5px 6px 15px rgba(0, 0, 0, 0.15)',
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <SignInButton mode='modal' redirectUrl='/create-user'>
+            <button className='py-2 px-8 rounded-md bg-violet-600 text-white text-sm drop-shadow-xl transition-all ease-out duration-300'>
+              Sign in
+            </button>
+          </SignInButton>
+        </motion.div>
+      ) : (
+        <div className='hidden md:flex absolute right-10 items-center gap-4'>
+          <p
+            className={classnames(
+              'text-sm',
+              isScrolled ? 'text-gray-800' : 'text-white'
+            )}
+          >
+            👋Hello, <b className='text-violet-400'>{user.firstName}</b>
+          </p>
+          <UserButton afterSignOutUrl='/' />
+        </div>
+      )}
     </nav>
   );
 };

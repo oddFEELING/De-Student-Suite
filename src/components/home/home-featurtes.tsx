@@ -13,7 +13,7 @@ const HomeFeatures: React.FC = () => {
           <h2 className='text-base font-semibold leading-7 text-violet-600'>
             Faith at your fingertips
           </h2>
-          <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+          <p className='mt-2 text-3xl font-bold w- tracking-tight text-gray-900 sm:text-4xl'>
             Everything you need to keep in touch
           </p>
           <p className='mt-6 text-lg leading-8 text-gray-600'>

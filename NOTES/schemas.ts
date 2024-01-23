@@ -37,32 +37,28 @@ type RotaSchema = {
   rota_description: string;
   created: string;
   status: 'open' | 'closed';
-  dates: [
-    {
-      date: string;
-      shifts: [string];
-      need_count: number;
-      available: Boolean;
-      people: {
-        pending: [string] | null | undefined;
-        approved: [string] | null | undefined;
-        declined: [string] | null | undefined;
-      };
-    }
-  ];
-  activity_feed: [
-    {
-      date: string;
-      agent: string;
-      target: string;
-      type: 'info' | 'success' | 'error' | 'warn';
-      event:
-        | 'showed interest in'
-        | 'denied interest for'
-        | 'is now on shift for'
-        | 'is filled at this time';
-    }
-  ];
+  dates: {
+    date: string;
+    shifts: [string];
+    need_count: number;
+    available: Boolean;
+    people: {
+      pending: [string] | null | undefined;
+      approved: [string] | null | undefined;
+      declined: [string] | null | undefined;
+    };
+  }[];
+  activity_feed: {
+    date: string;
+    agent: string;
+    target: string;
+    type: 'info' | 'success' | 'error' | 'warn';
+    event:
+      | 'showed interest in'
+      | 'denied interest for'
+      | 'is now on shift for'
+      | 'is filled at this time';
+  }[];
 };
 
 // ======= Event schema -->
@@ -96,3 +92,9 @@ const stats_to_watch: string[] = [
   'non students count',
   'Events counts',
 ];
+
+`Things to be managed in rota
+- The days of the month
+- Who is on what day
+- The time they have to bve around 
+`;

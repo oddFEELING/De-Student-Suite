@@ -6,7 +6,7 @@ import { FcCancel } from 'react-icons/fc';
 import { FaRegSave } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { CiMenuKebab } from 'react-icons/ci';
-import { classnames } from '@/utils/vclassnames';
+import { classnames } from '@/utils/classnames';
 import { IoPersonAddOutline, IoPersonRemoveOutline } from 'react-icons/io5';
 
 const RotaList = () => {
@@ -22,11 +22,11 @@ const RotaList = () => {
         Here is a list of savailable rotas for you to join.
       </p>
 
-      <div className='w-full md:w-3/4 flex flex-col h-max py-6 px-2 gap-6 mt-10'>
+      <div className='w-full md:w-3/4 flex flex-col h-max py-6 px-2 gap-6 mt-10 divide-y'>
         {rota_list?.map((item) => (
           <motion.div
             className={classnames(
-              'w-full h-max lg:h-28 bg-white drop-shadow-xl transition-all ease-out duration-300 hover:drop-shadow-2xl border-2 rounded-xl border-gray-300 flex flex-col gap-5 lg:flex-row px-8 py-10 hover:border-emerald-200  lg:items-center justify-between z-10',
+              'w-full h-max lg:h-28 bg-white transition-all ease-out duration-300 hover:drop-shadow-xl rounded-xl border-gray-200 flex flex-col gap-5 lg:flex-row px-8 py-10 border hover:border-gray-300  lg:items-center justify-between z-10',
               open === item._id && 'z-20'
             )}
             key={item._id}
@@ -65,7 +65,10 @@ const RotaList = () => {
             </div>
 
             <div className='flex items-center gap-5 justify-between md:justify-start'>
-              <button className='text-lg md:text-sm lg:text-base border rounded-md shadow transition-all duration-200 ease-out hover:shadow-lg py-1.5 px-6 border-gray-300 hover:border-gray-400 text-gray-800  cursor-pointer '>
+              <button
+                className='text-lg md:text-sm lg:text-base border rounded-md shadow transition-all duration-200 ease-out hover:shadow-lg py-1.5 px-6 border-gray-300 hover:border-gray-400 text-gray-800  cursor-pointer'
+                onClick={() => router.push('/rotas/2')}
+              >
                 view rota
               </button>
               <div className='relative'>
@@ -112,7 +115,7 @@ const RotaList = () => {
           </motion.div>
         ))}
       </div>
-      <div className='w-[400px] h-[250px] absolute right-0 bottom-0 overflow-hidden'>
+      <div className='w-[450px] h-[270px] absolute right-0 bottom-0 overflow-hidden'>
         <Image src='/rota/cute-dog.png' alt='cute-dog' fill />
       </div>
     </section>
