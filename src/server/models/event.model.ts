@@ -2,10 +2,19 @@ import { Schema, model, models } from 'mongoose';
 
 const event_schema = new Schema<EventType>(
   {
-    title: { type: String, required: true },
+    title: { type: String, required: true, unique: true },
     description: { type: String, required: true },
-    location: String,
-    date: String,
+    location: { type: String, required: true },
+    date: {
+      start: { type: String, default: Date.now().toLocaleString() },
+      end: { type: String, default: Date.now().toLocaleString() },
+    },
+    image_url: {
+      type: String,
+      required: true,
+      default:
+        'https://images.pexels.com/photos/4585617/pexels-photo-4585617.jpeg?auto=compress&cs=tinysrgb&w=800',
+    },
     notes: String,
     status: {
       type: String,
@@ -18,13 +27,18 @@ const event_schema = new Schema<EventType>(
       contact: {
         email: String,
         phone: String,
-        preferred: String,
+        preferred: {
+          type: String,
+          enum: ['email', 'phone'],
+          required: true,
+          default: 'email',
+        },
       },
     },
-    stars: Number,
-    shares: Number,
-    saves: Number,
-    interested: [String],
+    stars: { type: Number, required: true, default: 0 },
+    shares: { type: Number, required: true, default: 0 },
+    saves: { type: Number, required: true, default: 0 },
+    interested: [{ type: Schema.Types.ObjectId, ref: 'users', default: [] }],
   },
   { collection: 'events', timestamps: true }
 );

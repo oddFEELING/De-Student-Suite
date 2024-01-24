@@ -24,14 +24,14 @@ const AdminUserListCards = () => {
                 user.personal.role === 'creator') && (
                 <div
                   key={user._id}
-                  className=' px-6 md:px-4 h-max w-full max-w-6xl border shadow-xl rounded-lg flex flex-col text-center md:text-start md:flex-row  xl:col-span-1 gap-2 items-center justify-start py-4'
+                  className=' px-7 md:px-4 h-max w-full border shadow-xl rounded-lg flex flex-col text-center md:text-start md:flex-row  xl:col-span-1 gap-3 items-center justify-start py-4 max-w-xl'
                 >
                   <Image
                     src={user.personal.profile_image}
                     alt='user-profile-image'
                     width='40'
                     height='40'
-                    className='rounded-full shadow-md w-12 md:w-1/6'
+                    className='rounded-full shadow-md w-12 md:w-1/6 max-w-14'
                   />
                   <div className='w-full md:w-3/6 flex flex-col gap-1'>
                     <p className='text-sm truncate'>
@@ -44,7 +44,7 @@ const AdminUserListCards = () => {
                     </p>
                   </div>
 
-                  <button className='w-full md:w-2/6 py-1 px-3 rounded-md border border-gray-300 m-2 justify-self-end text-sm'>
+                  <button className='w-max py-1 px-3 rounded-md border border-gray-300 m-2 justify-self-end text-sm'>
                     Options
                   </button>
                 </div>
@@ -62,9 +62,9 @@ const ListSkeleton = () => (
     {[1, 2, 3, 4, 5, 6].map((item) => (
       <div
         key={item}
-        className=' px-4 h-20 w-full max-w-6xl border shadow-xl rounded-lg flex  xl:col-span-1 gap-4 items-center justify-start bg-gray-100'
+        className=' px-4 h-32 w-full max-w-lg max-w-6xl border shadow-xl rounded-lg flex  xl:col-span-1 gap-10 items-center justify-start bg-gray-100'
       >
-        <div className='rounded-full shadow-md w-12 md:w-1/6 bg-gray-400 h-12 md:h-14' />
+        <div className='rounded animate-pulse shadow-md w-12 md:w-1/6 bg-gray-400 h-12 md:h-14 max-w-14' />
         <div className='w-3/6 flex flex-col gap-1'>
           <div className='text-sm truncate w-2/3 bg-gray-400 animate-pulse h-3 ronded-md' />
           <div className='text-xs w-full bg-gray-400 h-3 rounded-md animate-pulse' />
